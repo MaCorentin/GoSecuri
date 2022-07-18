@@ -1,10 +1,7 @@
 ﻿@page "/"
 @inject NavigationManager navigation
+@inject AuthentificationController AuthControler
 <div class="vh-100" style="margin:0px;padding:0px;">
-    @*<div  style="border:solid;border-color:black;border-bottom:0px;margin-bottom:0px!important">
-    <h1 class="d-inline">Title</h1>
-    </div>*@
-
     <div class="d-flex h-100">
         <div class="w-60 d-flex align-items-center justify-content-center" style="background-color:#a29bfe">
             <div class="colm-form">
@@ -17,14 +14,51 @@
         <div class="w-40 d-flex align-items-center justify-content-center" style="background-color:#6c5ce7">
             <div class="colm-form">
                 <div class="form-container">
-                    <input type="text" placeholder="Adresse Email">
-                    <input type="password" placeholder="Mot de passe">
-                    <button class="btn-login" @onclick='()=>navigation.NavigateTo("MainPage")'>Connexion</button>
+                    <EditForm OnValidSubmit="Connection" Model="User">
+                        <InputText type="text" placeholder="Adresse Email" @bind-Value=@User.email></InputText>
+                        <InputText type="password" placeholder="Mot de passe" @bind-Value=@User.password></InputText>
+                        <button class="btn-login" type="submit">Connexion</button>
+
+                    </EditForm>
+
                 </div>
+                @if (result == "connect")
+                {
+                    <MudAlert Severity="Severity.Success"  Class="hide" Variant="Variant.Filled">Connection réussi !</MudAlert>
+                }
+                else if (result == "error")
+                {
+                    <MudAlert Severity="Severity.Error" Variant="Variant.Filled">Les identifiant sont incorrects </MudAlert>
+                }
+
             </div>
+
+
         </div>
-
     </div>
-
 </div>
+
+@code {
+    UserDataModel User = new UserDataModel();
+    bool AuthResult = false;
+    string result = "";
+
+    public async void Connection()
+    {
+        AuthResult = await AuthControler.Connection( User.password,User.email);
+        if (AuthResult == false)
+        {
+            result = "error";
+            StateHasChanged();
+        }
+        else
+        {
+            result = "connect";
+            StateHasChanged();
+            await Task.Delay(2000);
+            StateHasChanged();
+            navigation.NavigateTo("MainPage");
+        }
+    }
+}
 

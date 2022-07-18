@@ -1,4 +1,6 @@
 ﻿@page "/MainPage"
+@inject NavigationManager navigation
+
 <div class="vh-100 d-flex align-items-center justify-content-around align-self-center" style="background-color:#a29bfe;">
 
     <div class="w-60" style="background-color:white;border-radius:30px;padding:20px;height:80vh">
@@ -27,7 +29,7 @@
         <div class=" d-flex" style="flex-direction:column;justify-content:space-around;height:100%;">
             <img src="/css/img/user-png-icon-young-user-icon-2400.png" alt="user" class="w-40 align-self-center" />
             <button class="LeMeilleurBouton w-60 align-self-center" style="padding:10px!important">Valider</button>
-            <button class="LeMeilleurBouton w-60 align-self-center"style="padding:10px!important">Déconnexion</button>
+            <button @onclick='()=>navigation.NavigateTo("")' class="LeMeilleurBouton w-60 align-self-center"style="padding:10px!important">Déconnexion</button>
         </div>
 
     </div>

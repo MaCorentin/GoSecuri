@@ -11,6 +11,7 @@
     <PackageReference Include="Google.Apis.Auth.Mvc" Version="1.57.0" />
     <PackageReference Include="Google.Apis.Firestore.v1" Version="1.57.0.2732" />
     <PackageReference Include="Google.Cloud.Firestore" Version="3.0.0" />
+    <PackageReference Include="MudBlazor" Version="6.0.11" />
     <Folder Include="wwwroot\css\img\" />
   </ItemGroup>
 
