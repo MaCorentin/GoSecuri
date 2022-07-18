@@ -1,5 +1,5 @@
 ﻿@page "/"
-
+@inject NavigationManager navigation
 <div class="vh-100" style="margin:0px;padding:0px;">
     @*<div  style="border:solid;border-color:black;border-bottom:0px;margin-bottom:0px!important">
     <h1 class="d-inline">Title</h1>
@@ -19,7 +19,7 @@
                 <div class="form-container">
                     <input type="text" placeholder="Adresse Email">
                     <input type="password" placeholder="Mot de passe">
-                    <button class="btn-login">Connexion</button>
+                    <button class="btn-login" @onclick='()=>navigation.NavigateTo("MainPage")'>Connexion</button>
                 </div>
             </div>
         </div>
